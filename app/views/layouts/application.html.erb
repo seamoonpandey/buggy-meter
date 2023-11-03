@@ -29,12 +29,10 @@
           <% if user_signed_in? %>
           <a href="<%= user_path(current_user)%>">
            <i class="fa fa-user"></i>
-           user
           </a>
          <% else %>
           <a href="<%= new_user_session_path%>">
             <i class="fa fa-sign-in"></i>
-            signin
           </a>
          <% end %>
         </div>
