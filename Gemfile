@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.7.7"
 
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.1"
 
@@ -33,7 +34,11 @@ gem "jbuilder"
 gem "bootstrap", "~> 4.1.1"
 gem 'jquery-rails'
 gem 'font-awesome-rails'
-# gem 'sassc-rails'
+gem 'sassc-rails'
+
+# Use kaminari for pagination
+gem 'kaminari'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
