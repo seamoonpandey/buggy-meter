@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search/index'
   devise_for :users
   
   get 'home/index'
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
 
   resources :posts, only: [:new, :create, :show, :destroy]
+
+  get 'search' => 'search#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
