@@ -2,8 +2,8 @@
   <div class="profile row">
     <div class="col-md-4 avatar">
       <div class="wrapper">
-          <% if current_user.avatar.attached? %>
-            <%= image_tag current_user.avatar %>
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar %>
           <%end %>
       </div>
     </div>
@@ -11,21 +11,29 @@
     <div class="col-md-8 basic-info">
       <div class="user-wrapper">
       <div class="col-md-8 basic-info">
-      <div class="user-wrapper">
-        <p class="username"><%= current_user.name %></p>
+        <div class="user-wrapper">
+          <p class="username"><%= @user.name %></p>
+        </div>
+        <p class="name">@<%= @user.username %></p>
+        <%=link_to @user.website, @user.website, class:  'website' %>
       </div>
-    
-      <p class="name">@<%= current_user.username %></p>
-      <%=link_to current_user.website, current_user.website, class:  'website' %>
-    </div>
-        <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
-            <button>Edit Profile</button>
-        </a>
+        <% if current_user && current_user==@user %>
+            <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
+            <button class="btn bg-success text-white">Edit Profile</button>
+            <%= button_to(
+              "Logout",
+              destroy_user_session_path,
+              method: :delete,
+              class: 'btn bg-danger text-white'
+            )%>
+
+          </a>
+        <%end%>
       </div>
       <ul class="posts">
       <li><span><%= @posts.count %></span> posts</li>
-        <li><span>195</span> followers</li>
-        <li><span>345</span> following</li>
+      <!--  <li><span>195</span> followers</li> -->
+      <!--  <li><span>345</span> following</li> -->
       </ul>
     </div>
   </div>
@@ -35,6 +43,7 @@
     <i class="fa fa-th"></i>
     POSTS
   </a>
+  <!--
   <a class="tab" href="">
     <i class="fa fa-tv"></i>
     IGTV
@@ -47,6 +56,7 @@
     <i class="fa fa-tag"></i>
     TAGGED
   </a>
+  -->
 </div>
 <div class="user-images">
   <% @posts.each do |post|%>
