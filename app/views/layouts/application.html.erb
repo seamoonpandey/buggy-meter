@@ -29,10 +29,12 @@
           <% if user_signed_in? %>
             <a href="<%= destroy_user_session_path%>" data-method="delete">
               <i class="fa fa-user"></i>
+              <p>logout</p>
             </a>
           <% else %>
             <a href="<%= new_user_session_path%>">
               <i class="fa fa-sign-in"></i>
+              <p>login</p>
             </a>
           <% end %>
         </div>
