@@ -24,9 +24,8 @@
           <% end %>
         </div>
         <div class="user-section">
-          <a><i class="fa fa-compass"></i></a>
-          <a><i class="fa fa-heart"></i></a>
-          <% if user_signed_in? %>
+        <% if user_signed_in? %>
+        <a href="/posts/new"><i class="fa fa-plus"></i></a>
           <a href="<%= user_path(current_user)%>">
            <i class="fa fa-user"></i>
           </a>
