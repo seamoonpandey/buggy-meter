@@ -24,16 +24,22 @@
           <% end %>
         </div>
         <div class="user-section">
-        <% if user_signed_in? %>
-          <a href="/posts/new"><i class="fa fa-plus"></i></a>
-          <a href="<%= user_path(current_user)%>">
-           <i class="fa fa-user"></i>
-          </a>
-         <% else %>
-          <a href="<%= new_user_session_path%>">
-            <i class="fa fa-sign-in"></i>
-          </a>
-         <% end %>
+          <% if user_signed_in? %>
+            <a href="/posts/new"><i class="fa fa-plus"></i></a>
+            <a href="<%= user_path(current_user)%>">
+              <div class="user-icon">
+                <% if current_user.avatar.attached? %>
+                  <%= image_tag current_user.avatar %>
+                <%else%>
+                  <i class="fa fa-user"></i>
+                <%end %>
+              </div>
+            </a>
+          <% else %>
+            <a href="<%= new_user_session_path%>">
+              <i class="fa fa-sign-in"></i>
+            </a>
+          <% end %>
         </div>
       </div>
     </nav>
