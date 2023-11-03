@@ -18,8 +18,15 @@
         <%=link_to @user.website, @user.website, class:  'website' %>
       </div>
         <% if current_user %>
-          <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
-            <button>Edit Profile</button>
+            <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
+            <button class="btn bg-success text-white">Edit Profile</button>
+            <%= button_to(
+              "Logout",
+              destroy_user_session_path,
+              method: :delete,
+              class: 'btn bg-danger text-white'
+            )%>
+
           </a>
         <%end%>
       </div>
