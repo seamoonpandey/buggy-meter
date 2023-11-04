@@ -22,7 +22,8 @@
   <% else %>
     <%= button_to "Like", like_post_path(@post), method: "POST",class:'btn btn-success text-white mt-5' %>
   <% end %>
-</div>
+  </div>
+  <span><%= @post.likes.length %> likes</span>
 <div class="delete">
   <% if current_user.posts.exists?(@post.id) %>
     <%= button_to 'Delete Post', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary text-white' %>
