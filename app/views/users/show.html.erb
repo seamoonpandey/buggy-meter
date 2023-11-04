@@ -43,8 +43,8 @@
       
         <ul class="countables" type="none">
           <li><span><%= @posts.count %></span> posts</li>
-          <li><span><%= @user.followees.length %></span> following</li>
-          <li><span><%= @user.followers.length %></span> followers</li> 
+          <li><%= link_to "#{@user.followees.length} following", "/users/#{@user.id}/following" %></li>
+          <li><%= link_to "#{@user.followers.length} followers", "/users/#{@user.id}/followers" %></li>
         </ul>
       </div>
   </div>
