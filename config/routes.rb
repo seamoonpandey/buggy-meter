@@ -2,12 +2,18 @@ Rails.application.routes.draw do
   
   get 'home/index'
   root to: 'home#index'
-  
+
   devise_for :users
 
-  resources :users, only: [:show, :edit, :update]
-  post '/users/:id/follow', to: "users#follow", as: "follow_user"
-  post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
+  resources :users, only: [:show, :edit, :update] do
+    post :follow, on: :member, as: :follow
+    post :unfollow, on: :member, as: :unfollow
+    get :followers, on: :member, as: :followers
+    get :following, on: :member, as: :following
+  end
+  
+
+
 
   resources :posts, only: [:new, :create, :show, :destroy]
 

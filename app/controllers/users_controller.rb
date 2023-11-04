@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    before_action :find_user, only: [:show, :edit, :update, :follow, :unfollow]
+    before_action :find_user, only: [:show, :edit, :update, :follow, :unfollow, :followers, :following]
     
     def show
         @posts = @user.posts.order(created_at: :desc)
@@ -21,6 +21,14 @@ class UsersController < ApplicationController
     def unfollow
         current_user.followed_users.find_by(followee_id: @user.id).destroy
         redirect_back(fallback_location: user_path(@user))
+    end
+
+    def followers
+        @followers = @user.followers
+    end
+
+    def following
+        @followees = @user.followees
     end
 
     private
