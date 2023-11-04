@@ -7,8 +7,7 @@ class Post < ApplicationRecord
     has_many :hash_tags, through: :post_hash_tags
     has_many :likes, dependent: :destroy
 
-    after_create :update_likes_count
-    after_destroy :update_likes_count
+    
     
     validate :image_presence
 
@@ -25,8 +24,5 @@ class Post < ApplicationRecord
     end
     def extract_name_hash_tags
         description.to_s.scan(/#\w+/).map{|name| name.gsub("#", "")}
-    end
-    def update_likes_count
-        update_attribute(:likes_count, likes.count)
     end
 end
