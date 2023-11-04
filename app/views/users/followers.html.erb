@@ -22,11 +22,14 @@
                     <h5><%= follower.name %></h5>
                 </a>
         </div>
-    
+        <div class="info flex-grow-1">
+            <% if current_user.followees.include?(follower) %>
+                <%= button_to "Unfollow", unfollow_user_path(follower), method: "POST", class: 'btn btn-sm btn-danger float-end' %>
+            <% else %>
+                <%= button_to "Follow", follow_user_path(follower), method: "POST", class: 'btn btn-sm btn-primary float-end' %>
+            <% end %>
+        </div>
 
-            <div class="info flex-grow-1">
-              <button type="button" class="btn btn-sm btn-primary float-end">Follow Back</button>
-            </div>
           </li>
         <% end %>
       </ul>
