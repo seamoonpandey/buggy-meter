@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     post :unlike, on: :member, as: :unlike
   end
 
+  resources :conversations do
+    resources :messages
+  end
+
   get 'search' => 'search#index'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
