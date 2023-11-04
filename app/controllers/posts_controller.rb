@@ -11,6 +11,21 @@ class PostsController < ApplicationController
         @post.destroy
         redirect_to user_path(current_user)
     end
+
+    def like
+        post = Post.find(params[:id])
+        current_user.likes.create(post: post)
+    
+        redirect_back(fallback_location: root_path)
+    end
+
+    def unlike
+        post = Post.find(params[:id])
+        like = current_user.likes.find_by(post_id: post.id)
+        like.destroy
+
+        redirect_back(fallback_location: root_path)
+    end
     
     private
     def post_params

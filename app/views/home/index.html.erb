@@ -21,6 +21,11 @@
               <%= word %>
             <%end %>
           <% end %>
+          <% if current_user.liked?(post) %>
+            <%= button_to "Unlike", unlike_post_path(post), method: "DELETE" %>
+          <% else %>
+            <%= button_to "Like", like_post_path(post), method: "POST" %>
+          <% end %>
         </div>
     </section>
   <% end %>
