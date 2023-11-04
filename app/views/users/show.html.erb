@@ -15,27 +15,38 @@
           <p class="username"><%= @user.name %></p>
         </div>
         <p class="name">@<%= @user.username %></p>
+        <%if current_user && current_user!=@user%>
+            <%if current_user.followees.include?(@user) %>
+              <h5><%= button_to "Unfollow", unfollow_user_path, method: "POST", class: 'btn btn-secondary' %></h5>
+            <% else %>
+              <h5><%= button_to "Follow", follow_user_path, method: "POST", class: 'btn btn-primary'  %></h5>
+            <% end %>
+        <% end %>
         <%=link_to @user.website, @user.website, class:  'website' %>
       </div>
         <% if current_user && current_user==@user %>
-            <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
-            <button class="btn bg-success text-white">Edit Profile</button>
-            <%= button_to(
-              "Logout",
-              destroy_user_session_path,
-              method: :delete,
-              class: 'btn bg-danger text-white'
-            )%>
-
-          </a>
+            <div class="user-buttons">
+              <a class="edit-profile" href="<%= edit_user_path(current_user) %>">
+              <button class="btn bg-success text-white">Edit Profile</button>
+              </a>
+              <%= button_to(
+                "Logout",
+                destroy_user_session_path,
+                method: :delete,
+                class: 'btn bg-danger text-white'
+              )%>
+            </div>
+        <%else%>
+                
         <%end%>
       </div>
-      <ul class="posts">
-      <li><span><%= @posts.count %></span> posts</li>
-      <!--  <li><span>195</span> followers</li> -->
-      <!--  <li><span>345</span> following</li> -->
-      </ul>
-    </div>
+      
+        <ul class="countables" type="none">
+          <li><span><%= @posts.count %></span> posts</li>
+          <li><%= link_to "#{@user.followees.length} following", "/users/#{@user.id}/following" %></li>
+          <li><%= link_to "#{@user.followers.length} followers", "/users/#{@user.id}/followers" %></li>
+        </ul>
+      </div>
   </div>
 </div>
 <div class="user-tabs">

@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>Followers</h1>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <input type="text" class="form-control" placeholder="Search for followers">
+        </div>
+
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <% @followers.each do |follower| %>
+          <li class="list-group-item d-flex align-items-center">
+          <div class="avatar me-3">
+                <a href="<%= user_path(follower) %>" class="flex-row align-items-center d-flex gap-5">
+                    <%= image_tag follower.avatar, size: '50x50', class: 'rounded-circle' %>
+                    <h5><%= follower.name %></h5>
+                </a>
+        </div>
+        <div class="info flex-grow-1">
+            <% if current_user.followees.include?(follower) %>
+                <%= button_to "Unfollow", unfollow_user_path(follower), method: "POST", class: 'btn btn-sm btn-danger float-end' %>
+            <% else %>
+                <%= button_to "Follow", follow_user_path(follower), method: "POST", class: 'btn btn-sm btn-primary float-end' %>
+            <% end %>
+        </div>
+
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
