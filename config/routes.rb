@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :conversations do
     resources :messages
+    post 'conversations/:recipient_id/send_message', to: 'conversations#send_message', as: :conversations_send_message
   end
 
   get 'search' => 'search#index'
