@@ -12,7 +12,9 @@
         </div>
         <%= link_to post.user.username, user_path(post.user), class: 'username' %>
     </div>
-        <%= image_tag post.image, class: 'main-image' %>
+        <%=link_to post_path(post) do %>
+          <%= image_tag post.image, class: 'main-image' %>
+        <%end%>
         <div class="description">
           <% post.description.to_s.split(' ').each do |word| %>
             <% if word.start_with?('#') %>
@@ -22,9 +24,9 @@
             <%end %>
           <% end %>
           <% if current_user.liked?(post) %>
-            <%= button_to "Unlike", unlike_post_path(post), method: "POST" %>
+            <%= button_to "Unlike", unlike_post_path(post), method: "POST", class: 'btn btn-danger text-white mt-5' %>
           <% else %>
-            <%= button_to "Like", like_post_path(post), method: "POST" %>
+            <%= button_to "Like", like_post_path(post), method: "POST", class: 'btn btn-success text-white mt-5' %>
           <% end %>
         </div>
     </section>
