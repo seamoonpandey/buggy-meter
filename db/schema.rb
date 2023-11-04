@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_04_091537) do
     t.integer "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
   end
 
   create_table "follows", force: :cascade do |t|
