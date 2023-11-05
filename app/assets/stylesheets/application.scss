@@ -40,6 +40,11 @@
     height: 32px;
     width: 32px;
     display:flex;
+    img{
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
   .search-form{
     input{
@@ -88,8 +93,10 @@
         margin: 8px;
         img{
           width: 100%;
+          aspect-ratio: 1;
           border: 1px solid #efefef;
           border-radius: 50%;
+          object-fit: cover;
         }
       }
       .username{
