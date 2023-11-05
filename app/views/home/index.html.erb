@@ -30,6 +30,8 @@
               <%= button_to "Like", like_post_path(post), method: "POST", class: 'btn btn-success text-white mt-5' %>
             <% end %>
           <%end%>
+          <br/>
+          <span class="text-secondary">Posted on :<%= post.created_at %></span>
           </div>
           <span><%= post.likes.length %> likes</span>
     </section>
