@@ -25,7 +25,9 @@
     
 
             <div class="info flex-grow-1">
+            <% if current_user && current_user!=followee%>
                 <%= button_to "Unfollow", unfollow_user_path(followee), method: "POST", class: 'btn btn-sm btn-danger float-end' %>
+            <% end %>
             </div>
           </li>
         <% end %>

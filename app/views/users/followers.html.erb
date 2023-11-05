@@ -23,10 +23,12 @@
                 </a>
         </div>
         <div class="info flex-grow-1">
+        <% if current_user && current_user != follower%>
             <% if current_user.followees.include?(follower) %>
                 <%= button_to "Unfollow", unfollow_user_path(follower), method: "POST", class: 'btn btn-sm btn-danger float-end' %>
             <% else %>
                 <%= button_to "Follow", follow_user_path(follower), method: "POST", class: 'btn btn-sm btn-primary float-end' %>
+            <% end %>
             <% end %>
         </div>
 
