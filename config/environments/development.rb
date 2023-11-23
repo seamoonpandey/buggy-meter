@@ -77,4 +77,5 @@ Rails.application.configure do
   # Store uploaded files on the local file system
   config.active_storage.service = :local
   config.hosts << /.*\.ngrok\.io/
+  config.hosts << ENV["NGROK"]
 end
