@@ -1,8 +1,10 @@
 <div class="post-show row">
   <div class="col-md-8">
-    <%=image_tag @post.image, class: 'image' %>
+    <!-- Post Image -->
+    <%= image_tag @post.image, class: 'image' %>
   </div>
   <div class="col-md-4">
+    <!-- User Information -->
     <div class="user">
       <div class="avatar">
         <% if @post.user.avatar.attached? %>
@@ -13,21 +15,42 @@
       </div>
       <%= link_to @post.user.username, user_path(@post.user), class: 'username' %>
     </div>
+
+    <!-- Post Description -->
     <div class="description">
       <%= @post.description %>
     </div>
-  </div>
-  <% if current_user %>
-    <% if current_user.liked?(@post) %>
-      <%= button_to "Unlike", unlike_post_path(@post), method: "POST",class:'btn btn-danger text-white mt-5' %>
-    <% else %>
-      <%= button_to "Like", like_post_path(@post), method: "POST",class:'btn btn-success text-white mt-5' %>
+
+    <!-- Like/Unlike Buttons -->
+    <% if current_user %>
+      <% if current_user.liked?(@post) %>
+        <%= button_to "Unlike", unlike_post_path(@post), method: "POST", class: 'btn btn-danger text-white mt-5' %>
+      <% else %>
+        <%= button_to "Like", like_post_path(@post), method: "POST", class: 'btn btn-success text-white mt-5' %>
+      <% end %>
     <% end %>
-  <% end %>
+
+    <!-- Likes Count -->
+    <span><%= @post.likes.length %> likes</span>
+
+    <!-- Comment Section -->
+    <div class="comments-section">
+      <h4>Comments:</h4>
+      <% @post.comments.each do |comment| %>
+        <div class="comment">
+          <strong><%= comment.user.username %>:</strong> <%= comment.message %>
+        </div>
+      <% end %>
+
+      <!-- Comment Form -->
+      <% if user_signed_in? %>
+        <%= form_with(model: [@post, Comment.new], local: true) do |form| %>
+          <%= form.text_area :message, placeholder: 'Add a comment...', class: 'form-control' %>
+          <%= form.submit 'Post Comment', class: 'btn btn-primary mt-2' %>
+        <% end %>
+      <% else %>
+        <p>Sign in to post comments.</p>
+      <% end %>
+    </div>
   </div>
-  <span><%= @post.likes.length %> likes</span>
-<div class="delete">
-  <% if current_user && current_user.posts.exists?(@post.id) %>
-    <%= button_to 'Delete Post', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-secondary text-white' %>
-  <% end %>
 </div>

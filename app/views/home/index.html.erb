@@ -1,40 +1,71 @@
 <div class="homepage">
   <div class="posts">
-  <% @posts.each do |post| %>
-    <section class="post">
-      <div class="user">
-        <div class="avatar">
-          <% if post.user.avatar.attached? %>
-            <%= link_to user_path(post.user) do %>
-              <%= image_tag post.user.avatar %>
+    <% @posts.each do |post| %>
+      <section class="post">
+        <!-- User Information -->
+        <div class="user">
+          <div class="avatar">
+            <% if post.user.avatar.attached? %>
+              <%= link_to user_path(post.user) do %>
+                <%= image_tag post.user.avatar %>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
+          <%= link_to post.user.username, user_path(post.user), class: 'username' %>
         </div>
-        <%= link_to post.user.username, user_path(post.user), class: 'username' %>
-    </div>
-        <%=link_to post_path(post) do %>
+
+        <!-- Post Image -->
+        <%= link_to post_path(post) do %>
           <%= image_tag post.image, class: 'main-image' %>
-        <%end%>
+        <% end %>
+
+        <!-- Post Description with Hashtags -->
         <div class="description">
           <% post.description.to_s.split(' ').each do |word| %>
             <% if word.start_with?('#') %>
               <%= link_to word, search_path(query: word) %>
-            <%else %>
-              <%= word %>
-            <%end %>
-          <% end %>
-          <% if current_user %>
-            <% if current_user.liked?(post) %>
-              <%= button_to "Unlike", unlike_post_path(post), method: "POST", class: 'btn btn-danger text-white mt-5' %>
             <% else %>
-              <%= button_to "Like", like_post_path(post), method: "POST", class: 'btn btn-success text-white mt-5' %>
+              <%= word %>
             <% end %>
-          <%end%>
-          <br/>
-          <span class="text-secondary">Posted on :<%= post.created_at %></span>
-          </div>
-          <span><%= post.likes.length %> likes</span>
-    </section>
-  <% end %>
+          <% end %>
+        </div>
+
+        <!-- Like/Unlike Buttons -->
+        <% if current_user %>
+          <% if current_user.liked?(post) %>
+            <%= button_to "Unlike", unlike_post_path(post), method: "POST", class: 'btn btn-danger text-white mt-5' %>
+          <% else %>
+            <%= button_to "Like", like_post_path(post), method: "POST", class: 'btn btn-success text-white mt-5' %>
+          <% end %>
+        <% end %>
+
+        <!-- Post Timestamp -->
+        <br/>
+        <span class="text-secondary">Posted on: <%= post.created_at.strftime("%B %e, %Y %l:%M %p") %></span>
+
+        <!-- Likes Count -->
+        <span><%= post.likes.length %> likes</span>
+
+        <!-- Comment Section -->
+        <div class="comments-section">
+          <h4>Comments:</h4>
+          <% post.comments.each do |comment| %>
+            <div class="comment">
+              <strong><%= comment.user.username %>:</strong> <%= comment.message %>
+            </div>
+          <% end %>
+
+          <!-- Comment Form -->
+          <% if user_signed_in? %>
+            <%= form_with(model: [post, Comment.new], local: true) do |form| %>
+              <%= form.text_area :message, placeholder: 'Add a comment...', class: 'form-control' %>
+              <%= form.submit 'Post Comment', class: 'btn btn-primary mt-2' %>
+            <% end %>
+          <% else %>
+            <p>Sign in to post comments.</p>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
   </div>
 </div>
