@@ -12,11 +12,9 @@ Buggy Meter is a social media application similar to Instagram, built using Ruby
 - [Configuration](#configuration)
 - [Database Setup](#database-setup)
 - [Running the Application](#running-the-application)
-- [Testing](#testing)
 - [Deployment](#deployment)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Introduction
 
@@ -95,14 +93,6 @@ rails server
 ```
 
 Access the application at `http://localhost:3000`.
-
-## Testing
-
-Run the test suite to ensure everything is working correctly:
-
-```bash
-rails test
-```
 
 ## Deployment
 
