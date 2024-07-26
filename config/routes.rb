@@ -1,24 +1,22 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  
   get 'home/index'
   root to: 'home#index'
 
   devise_for :users
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: %i[show edit update] do
     post :follow, on: :member, as: :follow
     post :unfollow, on: :member, as: :unfollow
     get :followers, on: :member, as: :followers
     get :following, on: :member, as: :following
   end
-  
 
-
-
-  resources :posts, only: [:new, :create, :show, :destroy] do
+  resources :posts, only: %i[new create show destroy] do
     post :like, on: :member, as: :like
     post :unlike, on: :member, as: :unlike
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: %i[create destroy]
   end
 
   get 'search' => 'search#index'
@@ -27,7 +25,7 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Defines the root path route ("/")
   # root "posts#index"

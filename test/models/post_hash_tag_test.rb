@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: post_hash_tags
@@ -13,7 +15,7 @@
 #  index_post_hash_tags_on_hash_tag_id  (hash_tag_id)
 #  index_post_hash_tags_on_post_id      (post_id)
 #
-require "test_helper"
+require 'test_helper'
 
 class PostHashTagTest < ActiveSupport::TestCase
   # test "the truth" do

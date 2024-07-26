@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: likes
@@ -9,8 +11,8 @@
 #  user_id    :integer          not null
 #
 class Like < ApplicationRecord
-    belongs_to :user
-    belongs_to :post
+  belongs_to :user
+  belongs_to :post
 
-    # validates :user_id, uniqueness: { scope: :post_id }, message: "Can only like once per post."
+  # validates :user_id, uniqueness: { scope: :post_id }, message: "Can only like once per post."
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: comments
@@ -20,6 +22,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-    belongs_to :user
-    belongs_to :post
+  belongs_to :user
+  belongs_to :post
 end

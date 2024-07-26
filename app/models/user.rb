@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -39,5 +41,4 @@ class User < ApplicationRecord
   def liked?(post)
     likes.find_by(post_id: post.id)
   end
-
 end

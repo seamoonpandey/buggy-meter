@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: follows
@@ -8,7 +10,7 @@
 #  followee_id :integer
 #  follower_id :integer
 #
-require "test_helper"
+require 'test_helper'
 
 class FollowTest < ActiveSupport::TestCase
   # test "the truth" do
